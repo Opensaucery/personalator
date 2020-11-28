@@ -57,7 +57,7 @@ export default function App() {
       ],
       category: 'Judging'
 		},
-		{	questionText: 'What kind of job do like better',
+		{	questionText: 'What kind of job do you like better',
 			answerOptions: [
 				{ answerText: 'one that allows you to react quickly and improvise?', isCorrect: true },
 				{ answerText: 'one that allows you to determine goals and take steps to meet them?', isCorrect: false },
