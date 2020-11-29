@@ -530,10 +530,10 @@ export default function App() {
 				<div>
         <div className='score-section'>You are {result1}{result2}{result3}{result4}</div>
         <div className='score-details'>
-        {result1} {Math.round((14-score1)/14*100)} percent<br></br>
-        {result2} {Math.round((14-score2)/14*100)} percent<br></br>
-        {result3} {Math.round((14-score3)/14*100)} percent<br></br>
-        {result4} {Math.round((14-score4)/14*100)} percent
+        {result1} {Math.round((score1 < 7) ? (100-(score1/14*100)) : (score1/14*100))} percent<br></br>
+        {result2} {Math.round((score2 < 7) ? (100-(score2/14*100)) : (score2/14*100))} percent<br></br>
+        {result3} {Math.round((score3 < 7) ? (100-(score3/14*100)) : (score3/14*100))} percent<br></br>
+        {result4} {Math.round((score4 < 7) ? (100-(score4/14*100)) : (score4/14*100))} percent
         </div>
         </div>
 			) : (
