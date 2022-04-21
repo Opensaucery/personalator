@@ -1,5 +1,9 @@
 import React, { useState } from 'react';
 
+import Share from './Share';
+
+const hostURL = 'https://app.thatsiguy.com'
+
 export default function App() {
 	const questions = [
 		{
@@ -450,6 +454,8 @@ export default function App() {
   const [currentQuestion, setCurrentQuestion] = useState(0);
 
   const [showScore, setShowScore] = useState(false)
+  		/* HINT: replace "false" with logic to display the 
+      score when the user has answered all the questions */
 
   const [score1, setScore1] = useState(false)
   const [score2, setScore2] = useState(false)
@@ -520,23 +526,38 @@ export default function App() {
     } else {
       setShowScore(true)
     }
-  }
-  
+}
+
+	const shareStatement = 'I got '+result1+result2+result3+result4+'. This is the best test'
+
+
 	return (
 		<div className='app'>
-			{/* HINT: replace "false" with logic to display the 
-      score when the user has answered all the questions */}
+	
 			{showScore ? (
-				<div>
-        <div className='score-section'>You are {result1}{result2}{result3}{result4}</div>
-        <div className='score-details'>
-        {result1} {Math.round((score1 < 7) ? (100-(score1/14*100)) : (score1/14*100))} percent<br></br>
-        {result2} {Math.round((score2 < 7) ? (100-(score2/14*100)) : (score2/14*100))} percent<br></br>
-        {result3} {Math.round((score3 < 7) ? (100-(score3/14*100)) : (score3/14*100))} percent<br></br>
-        {result4} {Math.round((score4 < 7) ? (100-(score4/14*100)) : (score4/14*100))} percent
-        </div>
+				// answer view
+				<div className='container'>
+				<div className='score-section'>You are {result1}{result2}{result3}{result4}</div>
+				<div className='score-details'>
+					{result1} {Math.round((score1 < 7) ? (100-(score1/14*100)) : (score1/14*100))} percent<br></br>
+					{result2} {Math.round((score2 < 7) ? (100-(score2/14*100)) : (score2/14*100))} percent<br></br>
+					{result3} {Math.round((score3 < 7) ? (100-(score3/14*100)) : (score3/14*100))} percent<br></br>
+					{result4} {Math.round((score4 < 7) ? (100-(score4/14*100)) : (score4/14*100))} percent
+				</div>
+				<div className='bkDesc'>
+		Questions are from Lenore Thomson's excellent book, <a href='https://www.penguinrandomhouse.com/books/178420/personality-type-an-owners-manual-by-lenore-thomson/' target='_blank' rel="noreferrer">Personality Types: an Owner's Manual, published by Penguin Random House</a>. The explanations within are much more psychological than the general internet decriptions of types. It breaks down how the types interact in a dynamic way. Thoroughly recommended. 
+				</div>
+
+				<hr></hr>
+				<Share 
+					hostURL={hostURL}
+					shareStatement={shareStatement}
+				/>
+		
+		
         </div>
 			) : (
+				// question view
 				<>
 					<div className='question-section'>
 						<div className='question-count'>
@@ -545,8 +566,8 @@ export default function App() {
 						<div className='question-text'>{questions[currentQuestion].questionText}</div>
 					</div>
 					<div className='answer-section'>
-					{questions[currentQuestion].answerOptions.map((answerOption)=> (
-            <button onClick={() => handleAnswerButtonClick(answerOption.isCorrect, questions[currentQuestion].category)}>{answerOption.answerText}</button>))}
+						{questions[currentQuestion].answerOptions.map((answerOption)=> (
+        			    <button className='answer-button' onClick={() => handleAnswerButtonClick(answerOption.isCorrect, questions[currentQuestion].category)}>{answerOption.answerText}</button>))}
 					</div>
 				</>
 			)}
